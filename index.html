@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>App Splash</title>
+  <meta name="color-scheme" content="light dark" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap" id="splash" data-maintenance="false" role="main" aria-labelledby="appTitle">
+    <header>
+      <div class="logo" aria-hidden="true">LW</div>
+      <div>
+        <h1 id="appTitle">Lavender Wave</h1>
+        <p class="sub">セーフでインクルーシブな出会いのために</p>
+      </div>
+    </header>
+
+    <!-- 通常ロード表示（メンテ時は薄く） -->
+    <section class="panel" aria-live="polite" aria-busy="true">
+      <strong>起動中…</strong>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="読み込み中">
+        <i></i>
+      </div>
+      <p class="sub" id="tip">安全ガイドを読み込んでいます</p>
+    </section>
+
+    <!-- メンテナンス告知（data-maintenance="true" で表示） -->
+    <div class="maint" role="status">
+      <strong>メンテナンス中です。</strong> しばらくしてから再度お試しください。進捗は<a class="small-link" href="#" id="statusLink">ステータスページ</a>でお知らせします。
+    </div>
+
+    <div class="foot">
+      <span>v0.1.0</span>
+      <button class="btn" id="skip">スキップ</button>
+    </div>
+  </main>
+
+  <script>
+    /**
+     * 設定：
+     * ?maint=true でメンテ表示をON
+     * ?next=/welcome のように遷移先を指定可能
+     */
+    (function(){
+      const params = new URLSearchParams(location.search);
+      const maintenance = params.get('maint') === 'true';
+      const next = params.get('next') || '../vibe/welcome.html';
+      const splash = document.getElementById('splash');
+      const tip = document.getElementById('tip');
+      const skip = document.getElementById('skip');
+
+      // ステータスページのリンク（必要に応じて差し替え）
+      document.getElementById('statusLink').href = '/status';
+
+      splash.dataset.maintenance = maintenance ? 'true' : 'false';
+
+      // ヒント文のサイクル（簡易）
+      const hints = [
+        '安全ガイドを読み込んでいます',
+        'スパム対策を初期化しています',
+        'プロフィールを準備しています'
+      ];
+      let i = 0;
+      const cycle = setInterval(()=>{ tip.textContent = hints[(i++ % hints.length)]; }, 1400);
+
+      // 自動遷移（メンテ時は停止）
+      let to;
+      if(!maintenance){
+        to = setTimeout(()=>{ location.href = next; }, 2200);
+      }else{
+        tip.textContent = '現在メンテナンス中です';
+        splash.setAttribute('aria-busy', 'false');
+      }
+
+      // スキップボタン（アクセシビリティ用）
+      skip.addEventListener('click', ()=>{
+        if(!maintenance){ clearTimeout(to); clearInterval(cycle); location.href = next; }
+      });
+
+      // PWA/Standaloneでも背景が崩れないようにfocusトラップは不要（非入力画面のため）
+    })();
+  </script>
+</body>
+</html>

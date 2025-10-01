@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>メールで新規登録 | （サービス名）</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="signup.css" />
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="戸籍上女性のセクシャルマイノリティ向けアプリ：メールによる新規登録ページ" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <a class="brand" href="/" aria-label="トップへ">
+      <img src="/assets/logo.svg" alt="" class="brand__logo" />
+      <span class="brand__name">（サービス名）</span>
+    </a>
+  </header>
+
+  <main class="container" role="main">
+    <section class="card" aria-labelledby="signup-title">
+      <h1 id="signup-title" class="card__title">メールで新規登録</h1>
+      <p class="card__lede">18歳以上のみ登録できます。必要事項を入力してください。</p>
+
+      <!-- 成功/失敗のサーバー返却メッセージ（必要に応じて表示） -->
+      <div class="alert alert--error" role="alert" aria-live="polite" hidden>
+        入力内容に誤りがあります。各項目をご確認ください。
+      </div>
+
+      <form class="form" action="/signup/email" method="post" novalidate>
+        <!-- CSRF 対策のトークン（バックエンドで差し込み） -->
+        <input type="hidden" name="csrf_token" value="<!-- server-generated-token -->" />
+
+        <!-- Email -->
+        <div class="field">
+          <label class="field__label" for="email">メールアドレス</label>
+          <input
+            class="field__input"
+            id="email"
+            name="email"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            required
+            placeholder="you@example.com"
+            aria-describedby="email-help"
+          />
+          <p id="email-help" class="field__help">ログインと通知に使用します。第三者に公開されません。</p>
+          <p class="field__error" data-error-for="email" aria-live="polite"></p>
+        </div>
+
+        <!-- Password -->
+        <div class="field">
+          <label class="field__label" for="password">パスワード</label>
+          <input
+            class="field__input"
+            id="password"
+            name="password"
+            type="password"
+            inputmode="text"
+            autocomplete="new-password"
+            required
+            minlength="8"
+            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W_]{8,}$"
+            placeholder="8文字以上（英字と数字を1つ以上含む）"
+            aria-describedby="password-help"
+          />
+          <p id="password-help" class="field__help">
+            8文字以上で、英字と数字をそれぞれ1文字以上含めてください。
+          </p>
+          <p class="field__error" data-error-for="password" aria-live="polite"></p>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="field">
+          <label class="field__label" for="password_confirm">パスワード（確認）</label>
+          <input
+            class="field__input"
+            id="password_confirm"
+            name="password_confirm"
+            type="password"
+            inputmode="text"
+            autocomplete="new-password"
+            required
+            placeholder="もう一度入力"
+            aria-describedby="password-confirm-help"
+          />
+          <p id="password-confirm-help" class="field__help">
+            上と同じパスワードを入力してください（照合はサーバー側で検証します）。
+          </p>
+          <p class="field__error" data-error-for="password_confirm" aria-live="polite"></p>
+        </div>
+
+        <!-- Age & Terms -->
+        <fieldset class="consent" aria-describedby="consent-help">
+          <legend class="visually-hidden">同意事項</legend>
+
+          <label class="check">
+            <input id="is_adult" name="is_adult" type="checkbox" required />
+            <span>私は <strong>18歳以上</strong> です</span>
+          </label>
+
+          <label class="check">
+            <input id="agree_terms" name="agree_terms" type="checkbox" required />
+            <span>
+              <a href="/legal/terms" target="_blank" rel="noopener">利用規約</a> と
+              <a href="/legal/privacy" target="_blank" rel="noopener">プライバシーポリシー</a> に同意します
+            </span>
+          </label>
+
+          <p id="consent-help" class="field__help">
+            年齢・同意は必須です。確認のため、登録後に本人確認（KYC）を実施します。
+          </p>
+        </fieldset>
+
+        <!-- Submit -->
+        <div class="actions">
+          <button class="btn btn--primary" type="submit">登録する</button>
+          <a class="btn btn--ghost" href="/login" role="button">ログインへ戻る</a>
+        </div>
+
+        <!-- 補助リンク -->
+        <div class="aux">
+          <p>
+            メールが届かない場合は<span class="nowrap">「迷惑メール」</span>をご確認ください。<br>
+            他の方法で登録する場合は <a href="/signup">登録方法選択</a> へ。
+          </p>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <small>© <span id="y"></span> （サービス名）</small>
+  </footer>
+
+  <script>
+    // 年表示だけ（JS不要なら削除可）
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

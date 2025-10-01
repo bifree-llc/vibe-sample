@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ログイン | AppName</title>
+  <link rel="preconnect" href="/" />
+  <link rel="stylesheet" href="login.css" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="description" content="セクシャルマイノリティ向け安全設計の出会いアプリのログイン画面" />
+</head>
+<body>
+  <a class="skip-link" href="#main">メインコンテンツへ移動</a>
+
+  <div class="page">
+    <header class="header" aria-label="アプリヘッダー">
+      <a href="/" class="brand" aria-label="トップへ">
+        <!-- ロゴは適宜差し替え -->
+        <svg viewBox="0 0 32 32" class="brand__logo" aria-hidden="true">
+          <circle cx="16" cy="16" r="16" />
+        </svg>
+        <span class="brand__name">AppName</span>
+      </a>
+    </header>
+
+    <main id="main" class="main" aria-labelledby="loginTitle">
+      <section class="card" role="form" aria-describedby="loginDesc">
+        <h1 id="loginTitle" class="card__title">ログイン</h1>
+        <p id="loginDesc" class="card__desc">
+          登録済みのメールアドレスとパスワードでサインインしてください。
+        </p>
+
+        <!-- ソーシャルログイン（任意で非表示可） -->
+        <div class="providers">
+          <button class="btn btn--ghost providers__btn" type="button" aria-label="Appleで続ける">
+            <span class="providers__icon" aria-hidden="true"></span> Appleで続ける
+          </button>
+          <button class="btn btn--ghost providers__btn" type="button" aria-label="Googleで続ける">
+            <svg class="providers__svg" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+            </svg>
+            Googleで続ける
+          </button>
+        </div>
+
+        <div class="divider" role="separator" aria-label="または">
+          <span class="divider__text">またはメールで</span>
+        </div>
+
+        <!-- バリデーションエラー表示（サーバから返却時に .is-visible を付与） -->
+        <div class="alert" role="alert" id="formError" aria-live="polite">
+          <!-- 例）メールアドレスまたはパスワードが正しくありません。 -->
+        </div>
+
+        <form class="form" action="/login" method="post" novalidate>
+          <!-- CSRFトークンをサーバ側で出力 -->
+          <!-- <input type="hidden" name="_csrf" value="{{ token }}"> -->
+
+          <div class="form__field">
+            <label for="email" class="form__label">メールアドレス</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              inputmode="email"
+              autocomplete="email"
+              class="form__input"
+              placeholder="you@example.com"
+              required
+              aria-required="true"
+            />
+            <p class="form__error" id="emailError" aria-live="polite"></p>
+          </div>
+
+          <div class="form__field">
+            <div class="form__label-row">
+              <label for="password" class="form__label">パスワード</label>
+              <a class="form__aux" href="/forgot">パスワードをお忘れですか？</a>
+            </div>
+
+            <div class="password">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                class="form__input password__input"
+                placeholder="••••••••"
+                minlength="8"
+                required
+                aria-required="true"
+              />
+              <button
+                type="button"
+                class="password__toggle"
+                aria-label="パスワードの表示/非表示を切り替え"
+                aria-pressed="false"
+              >
+                <svg viewBox="0 0 24 24" class="password__icon" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+              </button>
+            </div>
+            <p class="form__error" id="passwordError" aria-live="polite"></p>
+          </div>
+
+          <div class="form__actions">
+            <button type="submit" class="btn btn--primary form__submit">ログイン</button>
+          </div>
+
+          <div class="form__meta">
+            <div class="remember">
+              <input type="checkbox" id="remember" name="remember" class="remember__input" />
+              <label for="remember" class="remember__label">次回から自動的にログイン</label>
+            </div>
+            <div class="tos">
+              ログインにより
+              <a href="/legal#terms" target="_blank" rel="noopener">利用規約</a>と
+              <a href="/legal#privacy" target="_blank" rel="noopener">プライバシーポリシー</a>
+              に同意したものとみなされます。
+            </div>
+          </div>
+        </form>
+
+        <div class="cta">
+          アカウントをお持ちでないですか？
+          <a href="/signup" class="cta__link">新規登録</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" aria-label="フッター">
+      <small>© <span id="year"></span> AppName</small>
+    </footer>
+  </div>
+
+  <script>
+    // 年表示
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // パスワード表示切替
+    (function () {
+      const btn = document.querySelector('.password__toggle');
+      const input = document.getElementById('password');
+      if (!btn || !input) return;
+      btn.addEventListener('click', function () {
+        const visible = input.type === 'text';
+        input.type = visible ? 'password' : 'text';
+        btn.setAttribute('aria-pressed', String(!visible));
+      });
+    })();
+  </script>
+</body>
+</html>

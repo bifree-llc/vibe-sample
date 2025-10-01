@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>ようこそ | （仮）アプリ名</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="戸籍上女性のセクシュアルマイノリティ向け、安心・安全な出会いとつながりの場。">
+  <link rel="preload" as="font" href="/assets/fonts/Inter-Variable.woff2" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page page--welcome">
+  <a class="skiplink" href="#main">本文へスキップ</a>
+
+  <header class="site-header" role="banner">
+    <div class="container header__inner">
+      <div class="brand">
+        <!-- 仮ロゴ：テキスト版。SVG差し替え推奨 -->
+        <a href="/welcome" class="brand__link" aria-label="ホームへ">
+          <span class="brand__mark" aria-hidden="true">◆</span>
+          <span class="brand__name">（仮）Bifree</span>
+        </a>
+      </div>
+      <nav class="header-nav" aria-label="主要ナビゲーション">
+        <a class="link link--ghost" href="/login">ログイン</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="site-main" role="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+        <div class="hero__copy">
+          <h1 id="hero-title" class="hero__title">
+            安心できる出会いを、あなたに。
+          </h1>
+          <p class="hero__subtitle">
+            戸籍上女性のセクシュアルマイノリティが、<br class="br--sm">
+            安全に “出会い・つながり・コミュニティ” を築ける場所。
+          </p>
+
+          <ul class="trust-points" aria-label="安全の取り組み">
+            <li>18歳以上・年齢確認の徹底</li>
+            <li>細かな公開範囲とブロック／通報</li>
+            <li>個人情報は最小限・暗号化保護</li>
+          </ul>
+
+          <div class="cta">
+            <a href="../vibe/signup-choice.html" class="button button--primary" data-testid="cta-signup">新規登録</a>
+            <a href="../vibe/login.html" class="button button--secondary" data-testid="cta-login">ログイン</a>
+          </div>
+
+          <p class="legal-hint">
+            ご利用前に
+            <a class="link" href="/legal#terms">利用規約</a> と
+            <a class="link" href="/legal#privacy">プライバシーポリシー</a>
+            をご確認ください。
+          </p>
+        </div>
+
+        <figure class="hero__visual" aria-hidden="true">
+          <!-- 代替：CSSグラデ＋形状。画像差し替え可 -->
+          <div class="visual-blob"></div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="features" aria-labelledby="features-title">
+      <div class="container">
+        <h2 id="features-title" class="sr-only">主な機能</h2>
+        <ul class="feature-list">
+          <li class="feature-card">
+            <h3 class="feature-card__title">匿名性とコントロール</h3>
+            <p class="feature-card__desc">ニックネーム運用。写真や属性の公開範囲を細かく設定。</p>
+          </li>
+          <li class="feature-card">
+            <h3 class="feature-card__title">スワイプで気軽に発見</h3>
+            <p class="feature-card__desc">目的や興味タグでマッチング精度を最適化。</p>
+          </li>
+          <li class="feature-card">
+            <h3 class="feature-card__title">安全サポート</h3>
+            <p class="feature-card__desc">通報・ブロック・緊急退出。初回デートの安全チップを同梱。</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer__inner">
+      <nav class="footer-nav" aria-label="フッターナビ">
+        <a class="link" href="/legal#terms">利用規約</a>
+        <a class="link" href="/legal#privacy">プライバシー</a>
+        <a class="link" href="/help">ヘルプ</a>
+      </nav>
+      <small class="copyright">© 2025 Bifree, Inc.</small>
+    </div>
+  </footer>
+</body>
+</html>
