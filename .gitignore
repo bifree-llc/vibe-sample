@@ -1,0 +1,94 @@
+# --- Logs ---
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun-debug.log*
+
+# --- Runtime data / PIDs ---
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# --- Dependency directories ---
+node_modules/
+.pnp/
+.pnp.js
+
+# --- Build & caches ---
+dist/
+build/
+.cache/
+.tmp/
+tmp/
+coverage/
+.nyc_output/
+
+# --- TypeScript ---
+*.tsbuildinfo
+
+# --- Next.js ---
+.next/
+out/
+
+# --- Nuxt ---
+.nuxt/
+.output/
+
+# --- Vite (if used by tools) ---
+vite.config.timestamp-*
+vite.svg
+
+# --- Storybook (if used) ---
+storybook-static/
+
+# --- Framework / platform deploy dirs ---
+.vercel/
+.netlify/
+
+# --- Env files (keep example only) ---
+.env
+.env.*.local
+.env.local
+.envrc
+.direnv/
+!.env.example
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+
+# --- Editors / IDEs ---
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.iml
+
+# --- Images & uploads (keep placeholder) ---
+public/uploads/*
+!public/uploads/.gitkeep
+
+# --- Database / local storage (if any) ---
+*.sqlite
+*.sqlite3
+*.db
+prisma/*.db
+prisma/*-journal
+
+# --- Lockfiles (commit one of them; ignore stray) ---
+# (You usually commit exactly ONE lockfile. These lines just avoid stray duplicates.)
+package-lock.backup*.json
+yarn.lock.backup*
+pnpm-lock.yaml.backup*
+bun.lockb.backup*
+
+# --- Misc ---
+*.swp
+*.swo
+*.orig
